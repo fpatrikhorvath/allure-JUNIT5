@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(loader = SpringBootContextLoader.class, value = {"classpath:spring.xml"})
 @SpringBootTest
 public class TestCore {
+
     @Autowired
     private UserLayerContextStore userLayerContextStore;
 
