@@ -26,7 +26,6 @@ public class BookTest extends TestCore {
         step("GIVEN a new user of status A", () -> {
             user.set(getUserService().initContextUser("A"));
             final ResponseEntity<CreateUser201ResponseDTO> response = getUserService().registerUser(user.get());
-            Thread.sleep(3 * 1000);
             assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
         });
     }
@@ -39,7 +38,6 @@ public class BookTest extends TestCore {
         step("GIVEN a new user of status A", () -> {
             user.set(getUserService().initContextUser("A"));
             final ResponseEntity<CreateUser201ResponseDTO> response = getUserService().registerUser(user.get());
-            Thread.sleep(3 * 1000);
             assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
         });
     }
