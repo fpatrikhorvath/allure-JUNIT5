@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import org.springframework.http.HttpHeaders;
+
 import java.util.List;
 
 @Service
@@ -23,43 +24,43 @@ public class BookClient {
 
     public BookClient(final UserLayerConfig userLayerConfig) {
         this.userLayerConfig = userLayerConfig;
-        HttpHeaders headers = new HttpHeaders();
+        final HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         this.restClient = new RestClient(this.userLayerConfig.getUrl(), headers);
     }
 
     public ResponseEntity<BookDTO> createBookForUser(final Long userId, final CreateBookForUserRequestDTO body) {
-        String endpoint = StringUtils.replace(POST_BOOK_PATH, "{userId}", String.valueOf(userId));
+        final String endpoint = StringUtils.replace(POST_BOOK_PATH, "{userId}", String.valueOf(userId));
         return restClient.post(endpoint, body, BookDTO.class);
     }
 
 
     public ResponseEntity<GenericErrorResponse> createBookForUserNeg(final Long userId, final CreateBookForUserRequestDTO body) {
-        String endpoint = StringUtils.replace(POST_BOOK_PATH, "{userId}", String.valueOf(userId));
+        final String endpoint = StringUtils.replace(POST_BOOK_PATH, "{userId}", String.valueOf(userId));
         return restClient.post(endpoint, body, GenericErrorResponse.class);
     }
 
     public ResponseEntity<Void> deleteBookForUser(final Long userId, final Long bookId) {
-        String endpoint = StringUtils
+        final String endpoint = StringUtils
                 .replace(DELETE_BOOK_PATH, "{userId}", String.valueOf(userId))
                 .replace("{bookId}", String.valueOf(bookId));
         return restClient.delete(endpoint, Void.class);
     }
 
     public ResponseEntity<GenericErrorResponse> deleteBookForUserNeg(final Long userId, final Long bookId) {
-        String endpoint = StringUtils
+        final String endpoint = StringUtils
                 .replace(DELETE_BOOK_PATH, "{userId}", String.valueOf(userId))
                 .replace("{bookId}", String.valueOf(bookId));
         return restClient.delete(endpoint, GenericErrorResponse.class);
     }
 
     public ResponseEntity<List<BookDTO>> getBooksForUser(final Long userId) {
-        String endpoint = StringUtils.replace(GET_BOOK_PATH, "{userId}", String.valueOf(userId));
+        final String endpoint = StringUtils.replace(GET_BOOK_PATH, "{userId}", String.valueOf(userId));
         return restClient.getList(endpoint, BookDTO.class);
     }
 
     public ResponseEntity<GenericErrorResponse> getBooksForUserNeg(final Long userId) {
-        String endpoint = StringUtils.replace(GET_BOOK_PATH, "{userId}", String.valueOf(userId));
+        final String endpoint = StringUtils.replace(GET_BOOK_PATH, "{userId}", String.valueOf(userId));
         return restClient.get(endpoint, GenericErrorResponse.class);
     }
 }
