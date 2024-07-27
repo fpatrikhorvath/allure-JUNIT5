@@ -1,5 +1,6 @@
 package com.framework.allure.tests.crud;
 
+
 import com.framework.allure.core.TestCore;
 import com.framework.allure.rest.response.BookDTO;
 import com.framework.allure.rest.response.CreateUser201ResponseDTO;
@@ -54,6 +55,8 @@ public class BookCRUDTest extends TestCore {
 
             assert actBook != null;
             assertEquals(actBook.getTitle(), contextBook.get().getTitle());
+            assertEquals(actBook.getAuthor(), contextBook.get().getAuthor());
+            assertEquals(actBook.getUserId(), contextUser.get().getId());
         });
     }
 
