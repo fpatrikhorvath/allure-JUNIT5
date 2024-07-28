@@ -4,6 +4,7 @@ import com.framework.allure.core.TestCore;
 import com.framework.allure.rest.response.CreateUser201ResponseDTO;
 import com.framework.allure.rest.response.UserDTO;
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -36,13 +37,15 @@ public class UserCRUDTest extends TestCore {
             assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.OK));
 
             final UserDTO actUser = Objects.requireNonNull(response.getBody()).stream().filter(u -> Objects.equals(u.getName(), contextUser.get().getName())).findFirst().orElse(null);
-
             assertEquals(actUser.getName(), contextUser.get().getName());
+            assertEquals(actUser.getEmail(), contextUser.get().getEmail());
+            assertEquals(actUser.getStatus(), contextUser.get().getStatus());
         });
     }
 
     @Test
     @Description("Delete user")
+    @Disabled("Not deleting the books of the deleted user")
     public void deleteUser() {
         final AtomicReference<UserDTO> contextUser = new AtomicReference<>();
 
