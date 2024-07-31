@@ -61,7 +61,7 @@ public class BookCRUDTest extends TestCore {
     }
 
     @Test
-    @Description("Delete book for user")
+    @Description("Create book for deleted user")
     public void createBookForDeletedUser() {
         final AtomicReference<UserDTO> contextUser = new AtomicReference<>();
 
@@ -82,7 +82,7 @@ public class BookCRUDTest extends TestCore {
         });
 
         step("WHEN delete the previously created book", () -> {
-            ResponseEntity<Void> response = getBookService().deleteBook(contextUser.get(), contextBook.get());
+            final ResponseEntity<Void> response = getBookService().deleteBook(contextUser.get(), contextBook.get());
             assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT));
         });
 

@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 public class TestCore {
 
     @Autowired
-    private UserLayerContextStore userLayerContextStore;
+    protected UserLayerContextStore userLayerContextStore;
 
     protected UserService getUserService() {
         return userLayerContextStore.getUserService();
