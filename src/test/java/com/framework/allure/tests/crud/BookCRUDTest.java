@@ -1,6 +1,5 @@
 package com.framework.allure.tests.crud;
 
-
 import com.framework.allure.core.TestCore;
 import com.framework.allure.rest.response.BookDTO;
 import com.framework.allure.rest.response.CreateUser201ResponseDTO;
@@ -17,7 +16,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Execution(ExecutionMode.CONCURRENT)
 public class BookCRUDTest extends TestCore {
@@ -30,7 +29,7 @@ public class BookCRUDTest extends TestCore {
         step("GIVEN a new user of status A", () -> {
             contextUser.set(getUserService().initContextUser("A"));
             final ResponseEntity<CreateUser201ResponseDTO> response = getUserService().registerUser(contextUser.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED)).isTrue();
             contextUser.get().setId(Objects.requireNonNull(response.getBody()).getId());
         });
 
@@ -39,13 +38,13 @@ public class BookCRUDTest extends TestCore {
         step("WHEN create a new book for the user", () -> {
             contextBook.set(getBookService().initContextBook(contextUser.get().getId()));
             final ResponseEntity<BookDTO> response = getBookService().registerBook(contextBook.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED)).isTrue();
             contextBook.get().setId(Objects.requireNonNull(response.getBody()).getId());
         });
 
         step("THEN verify that book exist", () -> {
             final ResponseEntity<List<BookDTO>> response = getBookService().getBooks(contextBook.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.OK));
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.OK)).isTrue();
 
             final BookDTO actBook = Objects.requireNonNull(response.getBody())
                     .stream()
@@ -54,21 +53,21 @@ public class BookCRUDTest extends TestCore {
                     .orElse(null);
 
             assert actBook != null;
-            assertEquals(actBook.getTitle(), contextBook.get().getTitle());
-            assertEquals(actBook.getAuthor(), contextBook.get().getAuthor());
-            assertEquals(actBook.getUserId(), contextUser.get().getId());
+            assertThat(actBook.getTitle()).isEqualTo(contextBook.get().getTitle());
+            assertThat(actBook.getAuthor()).isEqualTo(contextBook.get().getAuthor());
+            assertThat(actBook.getUserId()).isEqualTo(contextUser.get().getId());
         });
     }
 
     @Test
-    @Description("Delete book for user")
+    @Description("Create book for deleted user")
     public void createBookForDeletedUser() {
         final AtomicReference<UserDTO> contextUser = new AtomicReference<>();
 
         step("GIVEN a new user of status A", () -> {
             contextUser.set(getUserService().initContextUser("A"));
             final ResponseEntity<CreateUser201ResponseDTO> response = getUserService().registerUser(contextUser.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED)).isTrue();
             contextUser.get().setId(Objects.requireNonNull(response.getBody()).getId());
         });
 
@@ -77,18 +76,18 @@ public class BookCRUDTest extends TestCore {
         step("GIVEN create a new book for the user", () -> {
             contextBook.set(getBookService().initContextBook(contextUser.get().getId()));
             final ResponseEntity<BookDTO> response = getBookService().registerBook(contextBook.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED));
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.CREATED)).isTrue();
             contextBook.get().setId(Objects.requireNonNull(response.getBody()).getId());
         });
 
         step("WHEN delete the previously created book", () -> {
-            ResponseEntity<Void> response = getBookService().deleteBook(contextUser.get(), contextBook.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT));
+            final ResponseEntity<Void> response = getBookService().deleteBook(contextUser.get(), contextBook.get());
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)).isTrue();
         });
 
         step("THEN verify that book does not exist", () -> {
             final ResponseEntity<List<BookDTO>> response = getBookService().getBooks(contextBook.get());
-            assertTrue(response.getStatusCode().isSameCodeAs(HttpStatus.OK));
+            assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.OK)).isTrue();
 
             final BookDTO actBook = Objects.requireNonNull(response.getBody())
                     .stream()
@@ -96,7 +95,7 @@ public class BookCRUDTest extends TestCore {
                     .findFirst()
                     .orElse(null);
 
-            assertNull(actBook);
+            assertThat(actBook).isNull();
         });
     }
 }
