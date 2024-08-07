@@ -15,6 +15,11 @@ $ node server/server.js
 
 To run the tests:
 
+```
+$ mvn test
+```
+
+
 Select the proper test runner or the feature file and run by clicking on the run the button
 
 To run the report:
