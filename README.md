@@ -29,10 +29,12 @@ $ allure serve
 ```
 
 ## Technologies:
-Java 17/Maven/Springboot
+Java 17/Maven
+Spring Test -  Api request handling
 Selenium - later on
-JUnit 5
-Allure
+JUnit5 - (parallel) test running
+Allure - BDD/report generator
+AssertJ - for assertion
 
 ## License
 MIT
