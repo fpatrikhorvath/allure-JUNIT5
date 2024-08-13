@@ -1,4 +1,4 @@
-package com.framework.allure.tests;
+package com.framework.allure.tests.integration;
 
 import com.framework.allure.core.TestCore;
 import com.framework.allure.rest.response.BookDTO;
