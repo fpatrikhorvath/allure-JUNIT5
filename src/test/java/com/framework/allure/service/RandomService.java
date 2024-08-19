@@ -8,6 +8,7 @@ import java.util.Random;
 @Service
 public class RandomService {
     private static final String ALPHANUMERIC = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
     private final Random random = new SecureRandom();
 
     public String getRandomString(final int length) {

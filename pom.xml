@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -17,14 +17,14 @@
 
     <properties>
         <java.version>17</java.version>
-		<testng.version>7.7.1</testng.version>
+        <testng.version>7.7.1</testng.version>
         <allure-testng.version>2.20.1</allure-testng.version>
         <assertj.version>3.24.2</assertj.version>
     </properties>
 
     <dependencies>
 
-		<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>

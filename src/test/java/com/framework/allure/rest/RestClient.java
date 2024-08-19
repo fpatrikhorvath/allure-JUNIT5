@@ -4,24 +4,25 @@ import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.http.HttpHeaders;
 
 import java.util.List;
 
 
 public class RestClient {
     private static final Logger LOG = LogManager.getLogger(RestClient.class);
-    private final WebClient webClient;
-    private final HttpHeaders headers = new HttpHeaders();
-    private final ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
-    private final String url;
+
+    private final WebClient    webClient;
+    private final HttpHeaders  headers = new HttpHeaders();
+    private final ObjectMapper mapper  = new ObjectMapper().findAndRegisterModules();
+    private final String       url;
 
     public RestClient(final String url,
                       final HttpHeaders headers) {
         headers.forEach(this.headers::addAll);
-        this.url = url;
+        this.url       = url;
         this.webClient = WebClient.builder()
                 .baseUrl(url)
                 .defaultHeaders(httpHeaders -> httpHeaders.addAll(this.headers)).build();

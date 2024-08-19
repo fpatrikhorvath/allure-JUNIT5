@@ -16,12 +16,12 @@ import java.util.List;
 public class BookService {
     private static final Logger LOG = LogManager.getLogger(BookService.class);
 
-    private final BookClient bookClient;
+    private final BookClient    bookClient;
     private final RandomService randomService;
 
     public BookService(final BookClient bookClient,
                        final RandomService randomService) {
-        this.bookClient = bookClient;
+        this.bookClient    = bookClient;
         this.randomService = randomService;
     }
 

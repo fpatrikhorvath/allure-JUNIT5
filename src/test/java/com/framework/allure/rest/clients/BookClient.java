@@ -5,22 +5,22 @@ import com.framework.allure.rest.RestClient;
 import com.framework.allure.rest.request.CreateBookForUserRequestDTO;
 import com.framework.allure.rest.response.BookDTO;
 import com.framework.allure.rest.response.GenericErrorResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import org.springframework.http.HttpHeaders;
-
 import java.util.List;
 
 @Service
 public class BookClient {
-    private static final String GET_BOOK_PATH = "/users/{userId}/books";
-    private static final String POST_BOOK_PATH = "/users/{userId}/books";
+    private static final String GET_BOOK_PATH    = "/users/{userId}/books";
+    private static final String POST_BOOK_PATH   = "/users/{userId}/books";
     private static final String DELETE_BOOK_PATH = "/users/{userId}/books/{bookId}";
+
     private final UserLayerConfig userLayerConfig;
-    private final RestClient restClient;
+    private final RestClient      restClient;
 
     public BookClient(final UserLayerConfig userLayerConfig) {
         this.userLayerConfig = userLayerConfig;
