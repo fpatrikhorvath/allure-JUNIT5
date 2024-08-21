@@ -13,14 +13,11 @@ import org.springframework.test.context.ContextConfiguration;
 @SpringBootTest
 @Configurable
 public class TestCore {
-
     @Autowired
     protected UserLayerContextStore userLayerContextStore;
-
     protected UserService getUserService() {
         return userLayerContextStore.getUserService();
     }
-
     protected BookService getBookService() {
         return userLayerContextStore.getBookService();
     }
